@@ -1,0 +1,10 @@
+{
+    "id": "nix",
+    "version": "1.2.0",
+    "name": "Nix Package Manager",
+    "documentationURL": "https://github.com/e346m/nix-flake/tree/main",
+    "description": "Installs the Nix package manager",
+    "containerEnv": {
+        "PATH": "/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:${PATH}"
+    }
+}
