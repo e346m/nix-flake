@@ -26,4 +26,8 @@ else
         --extra-conf "sandbox = false" \
         --init none \
         --no-confirm
+
+
+    mkdir -p /etc/sudoers.d
+    echo 'Defaults    env_keep += "PATH"' >> /etc/sudoers.d/env_keep
 fi
