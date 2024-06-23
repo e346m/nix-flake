@@ -6,7 +6,30 @@ on:
       - main
 
 jobs:
+  test-features:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # または必要なバージョン
+
+      - name: Install dependencies
+        run: npm install -g @devcontainers/cli
+
+      - name: Run feature tests
+        run: |
+          cd src  # フィーチャーのディレクトリに移動
+          for feature in */; do
+            if [ -d "$feature" ]; then
+              echo "Testing feature: $feature"
+              npx @devcontainers/cli features test -f "$feature"
+            fi
+          done
   deploy:
+    needs: test-features
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     permissions:
