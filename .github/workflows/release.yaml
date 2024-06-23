@@ -21,9 +21,8 @@ jobs:
 
       - name: Run feature tests
         run: |
-          cd src  # フィーチャーのディレクトリに移動
-          for feature in */; do
-            if [ -d "$feature" ]; then
+          for feature in $(ls src); do
+            if [ -d "src/$feature" ]; then
               echo "Testing feature: $feature"
               npx @devcontainers/cli features test -f "$feature"
             fi
