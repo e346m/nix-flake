@@ -7,9 +7,16 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+
+useradd -m -s /bin/bash -u 1000 codespace \
+    && echo "codespace ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/codespace \
+    && chmod 0440 /etc/sudoers.d/codespace
+
+
 # Import common utils
 . ./utils.sh
 
+echo $USER
 
 if [ -e "/nix" ]; then
     echo "(!) Nix is already installed! Skipping installation."
@@ -27,7 +34,5 @@ else
         --init none \
         --no-confirm
 
-
-    mkdir -p /etc/sudoers.d
-    echo 'Defaults    env_keep += "PATH"' >> /etc/sudoers.d/env_keep
+    chown -R codespace:codespace /nix
 fi
