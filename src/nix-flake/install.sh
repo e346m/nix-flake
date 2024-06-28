@@ -35,8 +35,8 @@ else
         --no-confirm
 
     chown -R codespace:codespace /nix
-    
-    nix install profile nixpkgs#direnv
+
+    nix profile install nixpkgs#direnv
 
     eval "$(direnv hook bash)"
 fi
